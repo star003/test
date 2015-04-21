@@ -6,7 +6,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//	описание:
+//		парсим прогноз погоды с гисметео (тестовая обкатка)
+//	
 public class picProcessor {
 	
 	///////////////////////////////////////////////////////////////////////////////////
@@ -57,10 +60,14 @@ public class picProcessor {
 	
 	public static void main(String[] args) throws IOException {
 		ArrayList<ArrayList<String>> x =grabGismeteo();
+		int i = 0;
 		for(ArrayList<String> a:x){
 			for(String h:a){
+				System.out.print(i);
+				System.out.print(" = ");
 				System.out.print(h);
 				System.out.print("	");
+				i++;
 			}
 			System.out.println("");
 		}
