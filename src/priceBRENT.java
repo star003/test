@@ -73,13 +73,7 @@ public class priceBRENT {
 	    				
 	}//public static String currTime()
 	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
-		
-		System.out.println(priceBRENT.gis ());
-	}//public static void main(String[] args) throws IOException
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static String getVal() {
@@ -153,4 +147,28 @@ public class priceBRENT {
 		rez=rez.concat(a1.select("div.wicon.hum").first().text().replaceAll("[^\\d]", "")+rz);
 		return rez;
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	//	описание
+	//		колбания курса за день
+	static ArrayList<String> getUsdDay() throws IOException {
+		ArrayList<String> x = new ArrayList<String>();
+		Document doc  = Jsoup.connect("http://www.micex.ru/issrpc/marketdata/currency/selt/daily/short/result_2014_03_20.xml?boardid=CETS&secid=USD000UTSTOM").get();
+		Elements a1 = doc.select("row");
+		
+		x.add(a1.attr("LAST"));
+		x.add(a1.attr("OPEN"));
+		x.add(a1.attr("VOLTODAY"));
+		x.add(a1.attr("UPDATETIME"));
+		
+		return x;
+	}//static ArrayList<String> getUsdDay()
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+		getUsdDay();
+	}//public static void main(String[] args) throws IOException
+
+
 }//public class priceBRENT
