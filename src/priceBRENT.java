@@ -75,13 +75,6 @@ public class priceBRENT {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
-		
-		System.out.println(priceBRENT.gis ());
-	}//public static void main(String[] args) throws IOException
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	public static String getVal() {
 		return indicatorValue;
 	}//public static String getVal()
@@ -127,6 +120,8 @@ public class priceBRENT {
 		return metaElements.first().text();
 	}//public static String usd() throws IOException
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static String gis() throws IOException {
 		String rez=" ";
 		String rz = "\r\n";
@@ -152,5 +147,52 @@ public class priceBRENT {
 		//**влажность
 		rez=rez.concat(a1.select("div.wicon.hum").first().text().replaceAll("[^\\d]", "")+rz);
 		return rez;
-	}
+	}//public static String gis() throws IOException
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	по доллару с финам
+	/*
+	 * 	0 Последняя сделка 53,5840
+		1 Изменение 0,2490 (0,47%)
+		2 Сегодня, max 54,1680
+		3 Сегодня, min 53,4620
+		4 Цена открытия 53,6760
+		5 Пред. закрытие 53,3350
+		6 Объём торгов 2 023 013 000
+	 */
+	public static ArrayList<String> usdFinam() throws IOException {
+		ArrayList<String> x = new ArrayList<String>();
+		Document doc  = Jsoup.connect("http://www.finam.ru/profile/mosbirzha-valyutnyj-rynok/usdrubtom-usd-rub/").get();
+		Elements a1 = doc.select("td.value");
+		int i = 0;
+		for (Element d:a1) {
+			if(i>5 & i<13) {
+				x.add(d.text());
+			}	
+			i++;
+		}	
+		return x;
+	}//public static String gis() throws IOException
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * 	0 Последняя сделка 53,5840
+		1 Изменение 0,2490 (0,47%)
+		2 Сегодня, max 54,1680
+		3 Сегодня, min 53,4620
+		4 Цена открытия 53,6760
+		5 Пред. закрытие 53,3350
+		6 Объём торгов 2 023 013 000
+	 */
+	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+		int i = 0;
+		for (String a:usdFinam()) {
+			System.out.print(i);
+			System.out.print(" ");
+			System.out.println(a);
+			i++;
+		}
+		//System.out.println(priceBRENT.gis ());
+	}//public static void main(String[] args) throws IOException
+
 }//public class priceBRENT
