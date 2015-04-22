@@ -19,9 +19,11 @@ public class picProcessor {
 		ArrayList<String> x = new ArrayList<String>();
 		Elements tm = doc.select(prm);
 		for(Element v:tm) {
+			/*
 			if (i==13) {
 				break;
 			}
+			*/
 			x.add(v.text());
 			i++;
 		}
@@ -48,11 +50,23 @@ public class picProcessor {
 		x.add(getPokaz(doc,"th.df,th.current"));
 		x.add(getImg(doc,"tr.cloudness"));
 		x.add(getImg(doc,"tr.persp"));
-		x.add(getPokaz(doc,"span.value.m_temp.c"));
+		
+		ArrayList<String> m1 = new ArrayList<String>();
+		ArrayList<String> m2 = new ArrayList<String>();
+		ArrayList<String> m = getPokaz(doc,"span.value.m_temp.c");
+		for(int i = 0 ; i<m.size();i++) {
+			if (i<13) {
+				m1.add(m.get(i));
+			}
+			else if(i>=13 & i<=26) {
+				m2.add(m.get(i));
+			}
+		}
+		x.add(m1);
 		x.add(getPokaz(doc,"span.value.m_press.torr"));
 		x.add(getPokaz(doc,"dt.wicon"));
 		x.add(getPokaz(doc,"span.value.m_wind.ms"));
-		x.add(getPokaz(doc,"span.value.m_temp.c"));
+		x.add(m2);
 		return x;
 	}//static ArrayList<ArrayList<String>> grabGismeteo() throws IOException
 	
