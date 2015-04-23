@@ -285,27 +285,39 @@ public class gisFromSite {
 		getHourPrognoz();
 		
 	}//public static void main(String[] args) throws IOException
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	static public void getHourPrognoz() throws IOException{
 		Document doc  = Jsoup.connect("http://www.gismeteo.ru/city/hourly/4298/").get();
-		//<td class="temp"><span class='value m_temp c'>+4
-		//**Elements sun = doc.select("div.temp > dd.c");
-		
-		//**Elements a1 = doc.getElementsByTag("td[a]");
-		Elements a1 = doc.select("tbody[id=tbwdaily1]");
-		for(Element a:a1) {
-			Elements a2 = a.select("tr[class=wrow forecast]");
-			for (Element a3:a2) {
-				Elements a4 = a3.select("th");
-				for (Element td: a4.get(2).children()) {
-		            System.out.println(td.text());
-		        }
-				//System.out.println(a4.text());
-			}	
+		Elements a0 = doc.select("tr.wrow.forecast");
+		for (Element a1 : a0){
+			System.out.println("-------");
+			//**time forecast
+			Elements a2 = a1.select("th");
+			System.out.println(a2.text());
+			//**осадки
+			Elements a3 = a1.select("img.png");
+			System.out.println(a3.attr("alt"));
+			//**температура
+			Elements a4 = a1.select("span.value.m_temp.c");
+			System.out.println(a4.first().text());
+			//**давление
+			Elements a5 = a1.select("span.value.m_press.torr");
+			System.out.println(a5.first().text());
+			//**ветер
+			try{
+				Elements a6 = a1.select("dt.wicon.wind1,dt.wicon.wind2,dt.wicon.wind3,dt.wicon.wind4" +
+						"				dt.wicon.wind5,dt.wicon.wind6,dt.wicon.wind7,dt.wicon.wind8,dt.wicon.wind9");
+				System.out.println(a6.first().text());
+			}
+			catch(NullPointerException e) {
+				System.out.println("-");
+			}
+			//**сила ветер
+			Elements a7 = a1.select("span.value.m_wind.ms");
+			System.out.println(a7.first().text());
 		}	
-			
 	}//static public void getHourPrognoz() throws IOException
 	
 }//public class gisFromSite
