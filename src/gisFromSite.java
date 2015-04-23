@@ -7,6 +7,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -277,15 +278,34 @@ public class gisFromSite {
 	    			};
 	    return x;		
 	}//public String[] getCurrData()
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static void main(String[] args) throws IOException {
-		List<String> a = getPrognozV2();
-		int i = 0;
-		for(String h:a) {
-			System.out.println(h);
-			
-			System.out.println(i);
-			i++;
-		}	
+		getHourPrognoz();
+		
 	}//public static void main(String[] args) throws IOException
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	static public void getHourPrognoz() throws IOException{
+		Document doc  = Jsoup.connect("http://www.gismeteo.ru/city/hourly/4298/").get();
+		//<td class="temp"><span class='value m_temp c'>+4
+		//**Elements sun = doc.select("div.temp > dd.c");
+		
+		//**Elements a1 = doc.getElementsByTag("td[a]");
+		Elements a1 = doc.select("tbody[id=tbwdaily1]");
+		for(Element a:a1) {
+			Elements a2 = a.select("tr[class=wrow forecast]");
+			for (Element a3:a2) {
+				Elements a4 = a3.select("th");
+				for (Element td: a4.get(2).children()) {
+		            System.out.println(td.text());
+		        }
+				//System.out.println(a4.text());
+			}	
+		}	
+			
+	}//static public void getHourPrognoz() throws IOException
+	
 }//public class gisFromSite
