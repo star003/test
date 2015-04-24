@@ -74,11 +74,7 @@ public class priceBRENT {
 	}//public static String currTime()
 	
 	
-<<<<<<< HEAD
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-=======
->>>>>>> origin/master
+
 	public static String getVal() {
 		return indicatorValue;
 	}//public static String getVal()
@@ -151,7 +147,7 @@ public class priceBRENT {
 		//**влажность
 		rez=rez.concat(a1.select("div.wicon.hum").first().text().replaceAll("[^\\d]", "")+rz);
 		return rez;
-<<<<<<< HEAD
+
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////
@@ -169,16 +165,6 @@ public class priceBRENT {
 		
 		return x;
 	}//static ArrayList<String> getUsdDay()
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
-		getUsdDay();
-	}//public static void main(String[] args) throws IOException
-
-
-=======
-	}//public static String gis() throws IOException
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//	по доллару с финам
@@ -226,5 +212,5 @@ public class priceBRENT {
 		//System.out.println(priceBRENT.gis ());
 	}//public static void main(String[] args) throws IOException
 
->>>>>>> origin/master
+
 }//public class priceBRENT
