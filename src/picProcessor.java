@@ -75,6 +75,7 @@ public class picProcessor {
 	public static void main(String[] args) throws IOException {
 		ArrayList<ArrayList<String>> x =grabGismeteo();
 		int i = 0;
+		/*
 		for(ArrayList<String> a:x){
 			for(String h:a){
 				System.out.print(i);
@@ -85,6 +86,16 @@ public class picProcessor {
 			}
 			System.out.println("");
 		}
+		*/
+		System.out.println(x.get(1).get(0));//обл
+		System.out.println(x.get(2).get(0));//ос
+		
+		System.out.println(x.get(4).get(0));//тек давл
+		System.out.println(x.get(5).get(0));//ветер
+		System.out.println(x.get(6).get(0));//скорость
+		
+		
+		
 		//System.out.println(m_tempO.get(0));
 	} //public static void main(String[] args) throws IOException
 
