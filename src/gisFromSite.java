@@ -281,18 +281,15 @@ public class gisFromSite {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void main(String[] args) throws IOException {
-		/*
-		ArrayList<ArrayList<String>> x =getHourPrognoz();
-			for(ArrayList<String> a:x){
-				for(String h:a){
-					System.out.print(h);
-					System.out.print("	");
-				}
-				System.out.println("");
+		
+		for (String g:readMy()) {
+			System.out.println(g);
+			if (g.contains("u")) {
+				System.out.println("!!!!");
 			}
-		//System.out.println(m_tempO.get(0));
-		*/
-		//getCurGismeteo();
+		}
+		
+		
 	}//public static void main(String[] args) throws IOException
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
