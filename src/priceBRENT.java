@@ -192,18 +192,24 @@ public class priceBRENT {
 	}//public static String gis() throws IOException
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * 	0 Последняя сделка 53,5840
-		1 Изменение 0,2490 (0,47%)
-		2 Сегодня, max 54,1680
-		3 Сегодня, min 53,4620
-		4 Цена открытия 53,6760
-		5 Пред. закрытие 53,3350
-		6 Объём торгов 2 023 013 000
-	 */
+	
+	public static ArrayList<String> dynBrentFinam() throws IOException {
+		ArrayList<String> x = new ArrayList<String>();
+		Document doc  = Jsoup.connect("http://www.finam.ru/profile/tovary/brent/").get();
+		Elements a1 = doc.select("td.value");
+		int i = 0;
+		for (Element d:a1) {
+			if(i>5 & i<13) {
+				x.add(d.text());
+			}	
+			i++;
+		}	
+		return x;
+	}//public static String gis() throws IOException
+	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 		int i = 0;
-		for (String a:usdFinam()) {
+		for (String a:dynBrentFinam()) {
 			System.out.print(i);
 			System.out.print(" ");
 			System.out.println(a);
@@ -211,6 +217,4 @@ public class priceBRENT {
 		}
 		//System.out.println(priceBRENT.gis ());
 	}//public static void main(String[] args) throws IOException
-
-
 }//public class priceBRENT
