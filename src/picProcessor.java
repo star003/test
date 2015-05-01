@@ -15,7 +15,7 @@ public class picProcessor {
 	///////////////////////////////////////////////////////////////////////////////////
 	
 	static ArrayList<String> getPokaz(Document doc,String prm){
-		int i=0;
+		//int i=0;
 		ArrayList<String> x = new ArrayList<String>();
 		Elements tm = doc.select(prm);
 		for(Element v:tm) {
@@ -25,7 +25,7 @@ public class picProcessor {
 			}
 			*/
 			x.add(v.text());
-			i++;
+		//	i++;
 		}
 		return x;
 	}//static ArrayList<String> getPokaz(Document doc,String prm)
@@ -74,7 +74,7 @@ public class picProcessor {
 	
 	public static void main(String[] args) throws IOException {
 		ArrayList<ArrayList<String>> x =grabGismeteo();
-		int i = 0;
+		//int i = 0;
 		/*
 		for(ArrayList<String> a:x){
 			for(String h:a){
