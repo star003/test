@@ -281,15 +281,14 @@ public class gisFromSite {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void main(String[] args) throws IOException {
-		
-		for (String g:readMy()) {
-			System.out.println(g);
-			if (g.contains("u")) {
-				System.out.println("!!!!");
+		ArrayList<ArrayList<String>> x 	=getMagnetic();
+		for (int i = 0; i < x.size(); i++) {
+			for (int j = 0; j < x.get(i).size(); j++) {
+				System.out.print(x.get(i).get(j));
+				System.out.print(" ");
 			}
+			System.out.println("");
 		}
-		
-		
 	}//public static void main(String[] args) throws IOException
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,5 +349,30 @@ public class gisFromSite {
 		String ur = a0.attr("style");
 		return ur.substring(ur.indexOf("http"),ur.length()-1);
 	}//static String getCurGismeteoPic() throws IOException
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	описание:
+	//		магнитные бури
+	static public ArrayList<ArrayList<String>> getMagnetic() throws IOException{
+		ArrayList<ArrayList<String>> x 	= new ArrayList<ArrayList<String>>();
+		ArrayList<String> x1 = new ArrayList<String>();
+		int i=0;
+		
+		Document doc  = Jsoup.connect("http://www.gismeteo.ru/city/gm/4298/").get();
+		Elements a = doc.select("div.gm1,div.gm2,div.gm3,div.gm4,div.gm5,div.gm6,div.gm7,div.gm8");
+		//** 0,3,6,9,12,15,18,21
+		
+		for (Element a1 : a) {
+			if(i%8 ==0 & i>0) {
+				x.add(x1);
+				x1.clear();
+			}
+			
+			i++;
+			x1.add(a1.text());
+		}
+		x.add(x1);
+		return x;
+	}//static public ArrayList<ArrayList<String>> getMagnetic() throws IOException
 	
 }//public class gisFromSite
