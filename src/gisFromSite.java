@@ -278,15 +278,7 @@ public class gisFromSite {
 	    return x;		
 	}//public String[] getCurrData()
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public static void main(String[] args) throws IOException {
-		ArrayList<String> x 	= getMagnetic();
-		for (int i = 0; i < x.size(); i++) {
-			System.out.print(x.get(i));
-		}
-	}//public static void main(String[] args) throws IOException
-	
+		
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//	описание:
 	//	0-¬рем€
@@ -358,5 +350,54 @@ public class gisFromSite {
 		}
 		return x1;
 	}//static public ArrayList<ArrayList<String>> getMagnetic() throws IOException
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	static ArrayList<String[]> readMyWeatherHistory() throws IOException{
+		ArrayList<String[]> data = new ArrayList<String[]>();
+		URL url 				= new URL("http://star003.dlinkddns.com/05.php");
+        URLConnection conn 		= url.openConnection();
+        InputStreamReader rd 	= new InputStreamReader(conn.getInputStream(),"UTF-8");
+        StringBuilder allpage 	= new StringBuilder();
+        int n 					= 0;
+        char[] buffer 			= new char[40000];
+        while (n >= 0) {
+            n = rd.read(buffer, 0, buffer.length);
+            if (n > 0) {
+                allpage.append(buffer, 0, n).append("\n");
+            }
+        }
+		String[] x = allpage.toString().split("<br>");
+		/*
+		 * 0- год
+		 * 1- мес€ц
+		 * 2- день
+		 * 3- мин т
+		 * 4- макс т
+		 */
+		for (String s : x) {
+			try {
+				String[] h1 = s.split(":");
+				String[] h2 = h1[0].split("-");
+				data.add(new String[]{h2[0],h2[1],h2[2],h1[1],h1[2]});
+			}
+			catch (ArrayIndexOutOfBoundsException e1){
+			}
+		}
+		return data;
+	}//static ArrayList<String[]> readMyWeatherHistory() throws IOException
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static void main(String[] args) throws IOException {
+		ArrayList<String[]> data = readMyWeatherHistory();
+		for (int i = 0; i < data.size(); i++) {
+			for (String s : data.get(i)) {
+				System.out.print(s);
+				System.out.print(" ");
+			}
+			System.out.println("");
+		}
+	}//public static void main(String[] args) throws IOException
 	
 }//public class gisFromSite
