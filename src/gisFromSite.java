@@ -335,7 +335,7 @@ public class gisFromSite {
 		Document doc  	= Jsoup.connect("http://www.gismeteo.ru/city/hourly/4298/").get();
 		Elements a0 	= doc.select("dt.png");
 		String ur 		= a0.attr("style");
-		return ur.substring(ur.indexOf("http"),ur.length()-1);
+		return "http://"+ur.substring(ur.indexOf("//")+2,ur.length()-1);
 	}//static String getCurGismeteoPic() throws IOException
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -390,6 +390,7 @@ public class gisFromSite {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void main(String[] args) throws IOException {
+		/*
 		ArrayList<String[]> data = readMyWeatherHistory();
 		for (int i = 0; i < data.size(); i++) {
 			for (String s : data.get(i)) {
@@ -398,6 +399,8 @@ public class gisFromSite {
 			}
 			System.out.println("");
 		}
+		*/
+		System.out.println(getCurGismeteoPic());
 	}//public static void main(String[] args) throws IOException
 	
 }//public class gisFromSite
